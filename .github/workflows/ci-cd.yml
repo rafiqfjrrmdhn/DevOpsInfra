@@ -31,6 +31,7 @@ jobs:
         with:
           host: ${{ secrets.FJRRMDHN }}
           username: ${{ secrets.rafiqfjrrmdhn }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/rafiqfjrrmdhn/CRUD
             git pull origin master
