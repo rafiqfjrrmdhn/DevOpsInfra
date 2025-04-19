@@ -25,6 +25,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa ${{ secrets.FJRRMDHN }} >> ~/.ssh/known_hosts
 
       - name: Jalankan testing (optional)
         uses: appleboy/ssh-action@v0.1.10
