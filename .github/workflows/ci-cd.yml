@@ -30,8 +30,7 @@ jobs:
         with:
           host: ${{ secrets.FJRRMDHN }}
           username: ${{ secrets.rafiqfjrrmdhn }}
-          key: ${{ secrets.SERVER_SSH_KEY  }}
-           script: |
+            script: |
             cd /home/rafiqfjrrmdhn/CRUD
             git pull origin master
             pm2 restart app
