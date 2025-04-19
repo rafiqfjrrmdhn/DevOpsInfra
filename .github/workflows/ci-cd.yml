@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-deploy:
-    rubs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout kode
@@ -17,12 +17,12 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Insall dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Setup SSH key
         run: |
-          echo "${{ secrets.SERVER_SSH_KEY}}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
       - name: Jalankan testing (optional)
@@ -30,7 +30,7 @@ jobs:
         with:
           host: ${{ secrets.FJRRMDHN }}
           username: ${{ secrets.rafiqfjrrmdhn }}
-            script: |
+          script: |
             cd /home/rafiqfjrrmdhn/CRUD
             git pull origin master
             pm2 restart app
