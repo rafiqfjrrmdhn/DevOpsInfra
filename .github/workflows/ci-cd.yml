@@ -1,0 +1,37 @@
+name: CI/CD Node.js
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    rubs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Insall dependencies
+        run: npm install
+
+      - name: Setup SSH key
+        run: |
+          echo "${{ secrets.SERVER_SSH_KEY}}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Jalankan testing (optional)
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.FJRRMDHN }}
+          username: ${{ secrets.rafiqfjrrmdhn }}
+          key: ${{ secrets.SERVER_SSH_KEY  }}
+           script: |
+            cd /home/rafiqfjrrmdhn/CRUD
+            git pull origin master
+            pm2 restart app
